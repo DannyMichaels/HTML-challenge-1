@@ -5,11 +5,26 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   background: #ffffcc;
   font-family: sans-serif;
-  border: 2px solid #999;
+  height: 100vh;
+  position: relative; /*  how we got border to work */
 }
+
+body::before {
+  /*  how we got border to work */
+  position: fixed; /* this blocks clicking */
+  pointer-events: none; /* this unblocks clicking */
+  top: 0;
+  content: "";
+  right: 0;
+  left: 0;
+  bottom: 0;
+  border: 2px solid #999;
+  z-index: 1;
+} /*  how we got border to work */
 
 main {
   padding: 10px;
@@ -36,7 +51,6 @@ p {
 p.desktop {
   display: none;
 }
-
 @media screen and (min-width: 768px) {
   p.mobile {
     display: none;
@@ -44,7 +58,7 @@ p.desktop {
   p.desktop {
     display: flex;
   }
-  body {
+  body::before {
     border: 3px solid #000;
   }
 }
